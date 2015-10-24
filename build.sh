@@ -1,3 +1,5 @@
+set -e
+
 mkdir -p build/iso/boot/grub
 
 nasm -felf32 boot/boot.asm -o build/boot.o
