@@ -1,6 +1,7 @@
 #include "arch/x86/video.h"
 
 char *vidmem;
+unsigned char pos = 0;
 
 void video_init() {
 	vidmem = (char*) _X86_VIDMEM;
@@ -12,6 +13,18 @@ void screen_clear() {
 		vidptr[i] = ' ';
 		vidptr[i + 1] =	COLOR_LIGHT_GREY | COLOR_BLACK << 4;
 	}
+	pos = 0;
+}
+
+void putchar(char c) {
+	putchar_color(c, COLOR_LIGHT_GREY, COLOR_BLACK);
+}
+
+void putchar_color(char c, x86_colors fg, x86_colors bg) {
+	char *vidptr = vidmem;
+	vidptr[pos] = c;
+	vidptr[pos + 1] = fg | bg << 4;
+	pos += 2;
 }
 
 void puts(const char *s) {
@@ -19,11 +32,7 @@ void puts(const char *s) {
 }
 
 void puts_color(const char *s, x86_colors fg, x86_colors bg) {
-	char *vidptr = vidmem;
-	unsigned int i = 0;
 	for (char* t = (char*) s; *t; t++) {
-		vidptr[i] = *t;
-		vidptr[i + 1] = fg | bg << 4;
-		i += 2;
+		putchar(*t);
 	}
 }
