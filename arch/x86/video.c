@@ -1,8 +1,8 @@
-#include "../arch/x86.h"
+#include "arch/x86/video.h"
 
 char *vidmem;
 
-void arch_init() {
+void video_init() {
 	vidmem = (char*) _X86_VIDMEM;
 }
 

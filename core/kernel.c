@@ -1,7 +1,7 @@
-#include "../arch/x86.h"
+#include "../arch/x86/video.h"
 
 void kernel_main() {
-	arch_init();
+	video_init();
 
 	puts("Hello world!");
 }
