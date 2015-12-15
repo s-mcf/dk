@@ -10,5 +10,7 @@ void kernel_main() {
 	init_idt();
 	kb_init();
 
+	__asm__ volatile ("sti");
+
 	while(1);
 }

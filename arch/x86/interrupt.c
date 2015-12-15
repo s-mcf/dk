@@ -49,6 +49,26 @@ void init_idt()
 	idt_set_gate(30, (uint32_t)isr30, 0x08, 0x8E);
 	idt_set_gate(31, (uint32_t)isr31, 0x08, 0x8E);
 	idt_set_gate(32, (uint32_t)isr32, 0x08, 0x8E);
+	idt_set_gate(33, (uint32_t)keyboard_handler, 0x08, 0x8E);
+
+    _io_write(0x20, 0x11);
+    _io_write(0xA0, 0x11);
+
+    // Remap interrupts beyond 0x20 because the first 32 are cpu exceptions
+    _io_write(0x21, 0x20);
+    _io_write(0xA1, 0x28);
+
+    // ICW3 - setup cascading
+    _io_write(0x21, 0x00);
+    _io_write(0xA1, 0x00);
+
+    // ICW4 - environment info
+    _io_write(0x21, 0x01);
+    _io_write(0xA1, 0x01);
+
+    // mask interrupts
+    _io_write(0x21, 0xff);
+    _io_write(0xA1, 0xff);
 
 	idt_flush((uint32_t)&idt_ptr);
 }

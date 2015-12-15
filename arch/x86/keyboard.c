@@ -48,7 +48,6 @@ unsigned char keyboard_map[128] =
 };
 
 void keyboard_handler_main(void) {
-	puts("interrupt!");
 	unsigned char status;
 	char keycode;
 
