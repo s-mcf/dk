@@ -3,7 +3,6 @@
 #define _X86_VIDMEM 0xb8000
 #define _X86_SCREEN_ROWS 25
 #define _X86_SCREEN_COLS 80
-#define _X86_SCREEN_GRAYBLACK 0x07
 
 typedef enum {
 	COLOR_BLACK = 0,
@@ -24,7 +23,9 @@ typedef enum {
 	COLOR_WHITE = 15,
 } x86_colors;
 
-void arch_init();
+void video_init();
 void screen_clear();
+void putchar(char c);
+void putchar_color(char c, x86_colors fg, x86_colors bg);
 void puts(const char* s);
 void puts_color(const char *s, x86_colors fg, x86_colors bg);
