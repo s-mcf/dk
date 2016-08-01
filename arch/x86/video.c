@@ -33,21 +33,6 @@ void puts(const char *s) {
 
 void puts_color(const char *s, x86_colors fg, x86_colors bg) {
 	for (char* t = (char*) s; *t; t++) {
-		// When we encounter a newline, wrap
-		if (*t == '\n') {
-			unsigned int cursor_row = i % 80;
-			i += 80 - cursor_row;
-			// If our index overflows the screen buffer, clear the screen and
-			// start again from 0.
-			if (i > 80 * 25) {
-				screen_clear();
-				i = 0;
-			}
-		} else {
-			putchar(*t);
-        }
-		vidptr[i] = *t;
-		vidptr[i + 1] = fg | bg << 4;
-		i += 2;
+		putchar(*t);
 	}
 }
