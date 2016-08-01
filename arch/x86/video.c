@@ -1,7 +1,7 @@
 #include "arch/x86/video.h"
 
 char *vidmem;
-unsigned char pos = 0;
+unsigned int pos = 0;
 
 void video_init() {
 	vidmem = (char*) _X86_VIDMEM;
