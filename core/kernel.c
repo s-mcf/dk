@@ -7,12 +7,14 @@ void kernel_main() {
 	gdt_install();
 	video_init();
 
-	puts("Hello world!");
+	puts("-- DK: Donkey Kernel --\n");
 
 	init_idt();
 	kb_init();
+	puts("Interrupts ready!\n");
 
 	__asm__ volatile ("sti");
 
+	puts("Thus begins the infinite loop\n");
 	while(1);
 }
