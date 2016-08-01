@@ -1,6 +1,6 @@
 set -e
 cd "$(dirname "$0")"
-CFLAGS="-c -ffreestanding -Wall --std=c11 -I . -I dlibc/ -g"
+CFLAGS="-c -ffreestanding -Wall -Werror --std=c11 -I . -I dlibc/ -g"
 
 mkdir -p build/iso/boot/grub
 
