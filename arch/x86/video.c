@@ -22,12 +22,20 @@ void putchar(char c) {
 
 void putchar_color(char c, x86_colors fg, x86_colors bg) {
 	char *vidptr = vidmem;
-	if (c == '\n') {
-		pos += (_X86_SCREEN_COLS - ((pos / 2) % _X86_SCREEN_COLS)) * 2;
-	} else {
-		vidptr[pos] = c;
-		vidptr[pos + 1] = fg | bg << 4;
-		pos += 2;
+	switch (c) {
+		case '\n':
+			pos += (_X86_SCREEN_COLS - ((pos / 2) % _X86_SCREEN_COLS)) * 2;
+			break;
+		case '\b':
+			pos -= 2;
+			putchar_color(' ', fg, bg);
+			pos -= 2;
+			break;
+		default:
+			vidptr[pos] = c;
+			vidptr[pos + 1] = fg | bg << 4;
+			pos += 2;
+			break;
 	}
 }
 
