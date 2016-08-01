@@ -22,9 +22,13 @@ void putchar(char c) {
 
 void putchar_color(char c, x86_colors fg, x86_colors bg) {
 	char *vidptr = vidmem;
-	vidptr[pos] = c;
-	vidptr[pos + 1] = fg | bg << 4;
-	pos += 2;
+	if (c == '\n') {
+		pos += (_X86_SCREEN_COLS - ((pos / 2) % _X86_SCREEN_COLS)) * 2;
+	} else {
+		vidptr[pos] = c;
+		vidptr[pos + 1] = fg | bg << 4;
+		pos += 2;
+	}
 }
 
 void puts(const char *s) {
