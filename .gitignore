@@ -1,1 +1,3 @@
 build/
+# Ignore vagrant VM images etc.
+.vagrant
