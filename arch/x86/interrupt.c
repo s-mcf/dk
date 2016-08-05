@@ -87,5 +87,5 @@ static void idt_set_gate(uint8_t num, uint32_t base, uint16_t sel, uint8_t flags
 
 void isr_handler(registers_t regs)
 {
-	puts("recieved interrupt!");
+	// TODO handle interrupts
 } 
