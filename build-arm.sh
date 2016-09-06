@@ -1,4 +1,5 @@
 set -e
+set -x
 cd "$(dirname "$0")"
 CFLAGS="-c -mcpu=arm1176jzf-s -fpic -ffreestanding -std=c11  -O2 -Wall -Wextra -Werror -I . -I dlibc -g"
 

@@ -1,6 +1,6 @@
 #ifdef __arm__
 
-#include "../arch/arm/uart.h"
+#include "arch/arm/uart.h"
 
 #elif __i386__
 
@@ -11,29 +11,28 @@
 
 #endif
 
-
-void echo(void) {
-    while (1) {
-        uart_putc(uart_getc());
-    }
-}
-
 void kernel_main(void) {
 #ifdef __arm__
-    uart_init();
+	uart_init();
 #elif __i386__
-    gdt_install();
-    video_init();
+	gdt_install();
+	video_init();
 #endif
-    puts("-- DK: Donkey Kernel --\n");
+	puts("-- DK: Donkey Kernel --\n");
 
-#ifdef __arm__
-    echo();
-#elif __i386__
-    init_idt();
-    kb_init();
-    puts("Interrupts ready!\n");
-    puts("Thus begins the infinite loop\n");
-    while (1);
+#ifdef __i386__
+	init_idt();
+	kb_init();
+	puts("Interrupts ready!\n");
 #endif
+
+	puts("Thus begins the infinite loop\n");
+
+	while (1) {
+#ifdef __arm__
+		uart_putc(uart_getc());
+#elif __i386__
+		// spin for interrupts
+#endif
+	}
 }
