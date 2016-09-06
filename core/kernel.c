@@ -34,6 +34,7 @@ void kernel_main(void) {
 		uart_putc(uart_getc());
 #elif __i386__
 		// spin for interrupts
+		__asm__ volatile ("hlt");
 #endif
 	}
 }
