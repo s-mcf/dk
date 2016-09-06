@@ -23,6 +23,7 @@ void kernel_main(void) {
 #ifdef __i386__
 	init_idt();
 	kb_init();
+	__asm__ volatile ("sti");
 	puts("Interrupts ready!\n");
 #endif
 
